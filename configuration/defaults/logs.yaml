@@ -1,0 +1,12 @@
+defaults:
+  logs:
+    type: zerolog
+    format: text
+    level: trace
+    no_color: false
+    caller:
+      hide_caller: false
+      skip_frames: 2
+    sentry:
+      enable: false
+      dsn: ""

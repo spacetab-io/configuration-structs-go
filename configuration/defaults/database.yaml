@@ -1,0 +1,20 @@
+defaults:
+  database:
+    driver: postgres
+    host: 127.0.0.1
+    port: 5432
+    schema: public
+    user: postgres
+    pass: ""
+    database: ""
+    ssl_mode: disable
+    log_level: error
+    migrations:
+      run_on_start: false
+      path: ./migrations/
+    seeding:
+      run_on_start: false
+      seeds: [ ]
+    max_open_connections: 10
+    max_idle_connections: 0
+    connection_lifetime: 30m

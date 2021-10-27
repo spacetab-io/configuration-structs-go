@@ -1,0 +1,22 @@
+defaults:
+  webserver:
+    host: 0.0.0.0 # The host ip that webserver is listening to. By default - all.
+    port: 8080 # The port that webserver is listening to
+    cors:
+      enabled: false
+      allow_all_origins: true # allow *
+      lifetime: 12h
+      allow_methods: [ "GET", "POST", "PUT", "PATCH", "DELETE" ]
+      allow_headers: [ "Origin", "Content-Length", "Content-Type", "Authorization" ]
+      allow_credentials: false
+    timeouts:
+      read_header: 10s
+      read_request: 10s
+      write_response: 60s
+      idle: 60s
+      shutdown: 5s
+    requests_and_connections:
+      max_conn_per_ip: 200
+      max_req_per_conn: 500
+    compress: true
+    debug: true

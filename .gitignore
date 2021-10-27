@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+.git
+.golangci*.yml
+c.out
+coverage.html
+vendor
+bin
+linter.mk
+tests.mk
