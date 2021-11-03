@@ -26,3 +26,7 @@ func (i ApplicationInfo) GetAlias() string {
 func (i ApplicationInfo) GetVersion() string {
 	return i.Version
 }
+
+func (i ApplicationInfo) Summary() string {
+	return fmt.Sprintf("%s (%s) %s", i.Name, i.Version, i.Copyright)
+}

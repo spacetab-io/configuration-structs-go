@@ -12,6 +12,7 @@ type ApplicationInfoCfgInterface interface {
 	GetString() string
 	GetAlias() string
 	GetVersion() string
+	Summary() string
 }
 
 type DatabaseCfgInterface interface {

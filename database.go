@@ -76,7 +76,7 @@ func (d *Database) GetDSN() string {
 }
 
 func (d *Database) GetMigrationDSN() string {
-	return fmt.Sprintf("%s&x-migrations-table=migrations", d.GetDSN())
+	return fmt.Sprintf("%s&x-migrations-table=%s", d.GetDSN(), d.Migrations.TableName)
 }
 
 func (d *Database) GetMigrationsPath() string {
