@@ -16,9 +16,16 @@ const (
 	cfgValidationErrorFormat = "%s: %w - %s"
 )
 
+type SeedInfo struct {
+	Enabled     bool   `yaml:"enabled"`
+	Name        string `yaml:"name"`
+	Description string `yaml:"description"`
+	ClassName   string `yaml:"class_name"`
+}
+
 type SeedingCfg struct {
-	RunOnStart bool     `yaml:"run_on_start"`
-	Seeds      []string `yaml:"seeds"`
+	RunOnStart bool       `yaml:"run_on_start"`
+	Seeds      []SeedInfo `yaml:"seeds"`
 }
 
 type MigrationCfg struct {
@@ -89,6 +96,10 @@ func (d Database) GetMigrationsTableName() string {
 
 func (d Database) GetSchema() string {
 	return d.Schema
+}
+
+func (d Database) GetConnectionParams() (maxConnLifetime time.Duration, maxConns, minConns int32) {
+	return d.ConnectionLifeTime, int32(d.MaxOpenConnections), int32(d.MaxIdleConnections)
 }
 
 var (

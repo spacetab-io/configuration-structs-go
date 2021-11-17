@@ -1,5 +1,9 @@
 package cfgstructs
 
+import (
+	"time"
+)
+
 type Config interface {
 	ValidateAll() []error
 }
@@ -23,6 +27,8 @@ type DatabaseCfgInterface interface {
 
 	GetSchema() string
 	GetMigrationsTableName() string
+
+	GetConnectionParams() (maxConnLifetime time.Duration, maxConns, minConns int32)
 }
 
 type NSQQueueCfgInterface interface {
