@@ -102,6 +102,10 @@ func (d Database) GetConnectionParams() (maxConnLifetime time.Duration, maxConns
 	return d.ConnectionLifeTime, int32(d.MaxOpenConnections), int32(d.MaxIdleConnections)
 }
 
+func (d Database) MigrateOnStart() bool {
+	return d.Migrations.RunOnStart
+}
+
 var (
 	ErrDataIsEmpty   = errors.New("data is empty")
 	ErrDataIsInvalid = errors.New("data is invalid")

@@ -27,7 +27,7 @@ type DatabaseCfgInterface interface {
 
 	GetSchema() string
 	GetMigrationsTableName() string
-
+	MigrateOnStart() bool
 	GetConnectionParams() (maxConnLifetime time.Duration, maxConns, minConns int32)
 }
 
