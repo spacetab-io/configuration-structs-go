@@ -1,0 +1,10 @@
+defaults:
+  info:
+    id: null
+    alias: "service_alias"
+    name: "Service Name"
+    about: "Some information about service"
+    version: "optional version info"
+    docs: "link to docs"
+    contacts: "service_contact@email.com"
+    copyright: "copyright/left/center"

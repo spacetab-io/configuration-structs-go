@@ -1,4 +1,4 @@
-package cfgstructs
+package contracts
 
 type ServiceName string
 

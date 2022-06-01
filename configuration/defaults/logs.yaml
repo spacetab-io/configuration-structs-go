@@ -3,9 +3,9 @@ defaults:
     type: zerolog
     format: text
     level: trace
-    no_color: false
+    isColored: false
     caller:
-      hide_caller: false
+      show: true
       skip_frames: 2
     sentry:
       enable: false

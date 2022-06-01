@@ -6,7 +6,7 @@ defaults:
     schema: public
     user: postgres
     pass: ""
-    database: ""
+    database: db_name
     ssl_mode: disable
     log_level: error
     migrations:

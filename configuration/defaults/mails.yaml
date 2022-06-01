@@ -1,0 +1,13 @@
+defaults:
+  mails:
+    provider: ""
+    from:
+      email: ""
+      name: ""
+    replyTo:
+      email: ""
+      name: ""
+    mimeType: ""
+    subjectPrefix: ""
+    template: ""
+    providers:

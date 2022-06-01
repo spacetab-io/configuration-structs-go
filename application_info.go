@@ -5,14 +5,14 @@ import (
 )
 
 type ApplicationInfo struct {
-	ID        int64  `json:"id,omitempty"`
-	Alias     string `json:"alias"`
-	Name      string `json:"name"`
-	About     string `json:"about"`
-	Version   string `json:"version"`
-	Docs      string `json:"docs"`
-	Contacts  string `json:"contacts"`
-	Copyright string `json:"copyright"`
+	ID        int64  `yaml:"id" json:"id,omitempty"`
+	Alias     string `yaml:"alias" json:"alias,omitempty"`
+	Name      string `yaml:"name" json:"name"`
+	About     string `yaml:"about" json:"about,omitempty"`
+	Version   string `yaml:"version" json:"version,omitempty"`
+	Docs      string `yaml:"docs" json:"docs,omitempty"`
+	Contacts  string `yaml:"contacts" json:"contacts,omitempty"`
+	Copyright string `yaml:"copyright" json:"copyright,omitempty"`
 }
 
 func (i ApplicationInfo) GetString() string {

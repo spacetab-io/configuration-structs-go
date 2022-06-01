@@ -1,6 +1,7 @@
 package cfgstructs
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -34,4 +35,40 @@ type WebServer struct {
 	RequestsAndConnections RACCfg       `yaml:"requests_and_connections"`
 	Compress               bool         `yaml:"compress"`
 	Debug                  bool         `yaml:"debug"`
+}
+
+func (w WebServer) GetReadRequestTimeout() time.Duration {
+	return w.Timeouts.ReadRequest
+}
+
+func (w WebServer) GetWriteResponseTimeout() time.Duration {
+	return w.Timeouts.WriteResponse
+}
+
+func (w WebServer) GetIdleTimeout() time.Duration {
+	return w.Timeouts.Idle
+}
+
+func (w WebServer) GetShutdownTimeout() time.Duration {
+	return w.Timeouts.Shutdown
+}
+
+func (w WebServer) GetMaxConnsPerIP() int {
+	return w.RequestsAndConnections.MaxConnsPerIP
+}
+
+func (w WebServer) GetMaxRequestsPerConn() int {
+	return w.RequestsAndConnections.MaxRequestsPerConn
+}
+
+func (w WebServer) UseCompression() bool {
+	return w.Compress
+}
+
+func (w WebServer) CORSEnabled() bool {
+	return w.CORS.Enabled
+}
+
+func (w WebServer) GetListenAddress() string {
+	return fmt.Sprintf("%v:%d", w.Host, w.Port)
 }

@@ -16,7 +16,8 @@ type NSQQueue struct {
 }
 
 type MessageQueue struct {
-	Nsq NSQQueue `yaml:"nsq"`
+	Nsq   NSQQueue   `yaml:"nsq"`
+	Kafka KafkaQueue `yaml:"kafka"`
 }
 
 func (s NSQQueue) GetNSQLookupdPath() string {
@@ -25,4 +26,24 @@ func (s NSQQueue) GetNSQLookupdPath() string {
 
 func (s NSQQueue) GetNSQdPath() string {
 	return fmt.Sprintf("%s:%v", s.NsqdHost, s.NsqdPort)
+}
+
+type KafkaBroker struct {
+	Host string
+	Port int
+}
+
+type KafkaQueue struct {
+	Enable  bool
+	Brokers []KafkaBroker
+}
+
+func (kq KafkaQueue) GetBrokersHosts() []string {
+	hosts := make([]string, 0, len(kq.Brokers))
+
+	for _, broker := range kq.Brokers {
+		hosts = append(hosts, fmt.Sprintf("%s:%d", broker.Host, broker.Port))
+	}
+
+	return hosts
 }

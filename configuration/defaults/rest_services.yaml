@@ -1,0 +1,12 @@
+defaults:
+  rest_services:
+    - enable: true
+      base_url: localhost:8081/api/v1
+      timeout: 5s
+      gzip_content: true
+      debug: true
+      authentication:
+        enable: false
+        type: jwt # jwt|basic
+        login: null # null for JWT, username or login for Basic Auth
+        secret: 50me.T0ken0rpa55w0rd
