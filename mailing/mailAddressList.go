@@ -12,6 +12,10 @@ func NewMailAddressListFromInterface(il MailAddressListInterface) MailAddressLis
 	return mal
 }
 
+func (mal MailAddressList) String() string {
+	return "mailAddressList"
+}
+
 func (mal MailAddressList) Validate() (bool, error) {
 	for _, ma := range mal {
 		ok, err := ma.Validate()
