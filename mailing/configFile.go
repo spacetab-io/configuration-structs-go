@@ -7,9 +7,8 @@ import (
 )
 
 type FileConfig struct {
-	Enabled  bool   `yaml:"enabled" valid:"optional"`
-	filePath string `yaml:"filePath" valid:"required"`
-	Async    bool   `yaml:"async" valid:"optional,bool"`
+	FilePath string `yaml:"filePath" valid:"required"`
+	Async    bool   `yaml:"isAsync" valid:"-"`
 }
 
 func (fc FileConfig) Validate() (bool, error) {
@@ -17,11 +16,11 @@ func (fc FileConfig) Validate() (bool, error) {
 }
 
 func (fc FileConfig) String() string {
-	return "file"
+	return fc.Name().String()
 }
 
-func (fc FileConfig) IsEnable() bool {
-	return fc.Enabled
+func (fc FileConfig) Name() MailProviderName {
+	return MailProviderFile
 }
 
 func (fc FileConfig) IsAsync() bool {
@@ -41,7 +40,7 @@ func (fc FileConfig) GetPassword() string {
 }
 
 func (fc FileConfig) GetHostPort() contracts.AddressInterface {
-	return &contracts.HostCfg{Host: fc.filePath}
+	return &contracts.HostCfg{Host: fc.FilePath}
 }
 
 func (fc FileConfig) GetEncryption() MailProviderEncryption {

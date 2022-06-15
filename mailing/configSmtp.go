@@ -7,7 +7,6 @@ import (
 )
 
 type SMTPConfig struct {
-	Enabled           bool                   `yaml:"enabled" valid:"optional"`
 	Host              string                 `yaml:"host" valid:"required"`
 	Port              uint                   `yaml:"port" valid:"required"`
 	Username          string                 `yaml:"username" valid:"optional"`
@@ -24,11 +23,11 @@ func (sc SMTPConfig) Validate() (bool, error) {
 }
 
 func (sc SMTPConfig) String() string {
-	return "smtp"
+	return sc.Name().String()
 }
 
-func (sc SMTPConfig) IsEnable() bool {
-	return sc.Enabled
+func (sc SMTPConfig) Name() MailProviderName {
+	return MailProviderSendgrid
 }
 
 func (sc SMTPConfig) IsAsync() bool {

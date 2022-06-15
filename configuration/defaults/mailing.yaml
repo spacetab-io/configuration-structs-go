@@ -1,0 +1,39 @@
+defaults:
+  mailing:
+    message:
+      from:
+        email: "noreply@spacetab.io"
+        name: "Do not reply me"
+      replyTo:
+        email: "reply@spacetab.io"
+        name: "Reply me"
+      mimeType: text/plain # text/html | text/plain
+    providers:
+      active: file # file/smtp/mailgun/mandrill/sendgrid/smtp
+      available:
+        file:
+          filePath: "emails.log"
+          isAsync: true
+        mailgun:
+          apiBase: "eu" # us|eu
+          domain: ""
+          key: ""
+          DKIMPrivateKey: ""
+          sendTimeout: 5s
+        mandrill:
+          key: ""
+          isAsync: true
+        sendgrid:
+          key: "SG.account.key"
+          dkimPrivateKey: ""
+          sendTimeout: 5s
+        smtp:
+          host: 127.0.0.1
+          port: 587
+          username: ""
+          password: ""
+          encryption: none # none/ssl/tls/ssl/starttls
+          authType: none # none/plain/login/cram-md5
+          DKIMPrivateKey: ""
+          connectionTimeout: 3s
+          sendTimeout: 5s

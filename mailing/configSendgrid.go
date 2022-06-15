@@ -7,10 +7,17 @@ import (
 )
 
 type SendgridConfig struct {
-	Enabled        bool          `yaml:"enabled" valid:"optional"`
 	Key            string        `yaml:"key" valid:"required"`
 	DkimPrivateKey string        `yaml:"dkimPrivateKey"`
 	SendTimeout    time.Duration `yaml:"sendTimeout"`
+}
+
+func (sc SendgridConfig) String() string {
+	return sc.Name().String()
+}
+
+func (sc SendgridConfig) Name() MailProviderName {
+	return MailProviderSendgrid
 }
 
 func (sc SendgridConfig) IsAsync() bool {
@@ -43,14 +50,6 @@ func (sc SendgridConfig) GetSendTimeout() time.Duration {
 
 func (sc SendgridConfig) Validate() (bool, error) {
 	return contracts.ConfigValidate(sc)
-}
-
-func (sc SendgridConfig) String() string {
-	return "sendgridAPI"
-}
-
-func (sc SendgridConfig) IsEnable() bool {
-	return sc.Enabled
 }
 
 func (sc SendgridConfig) ConnectionType() MailProviderConnectionType {

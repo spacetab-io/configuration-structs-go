@@ -7,9 +7,16 @@ import (
 )
 
 type MandrillConfig struct {
-	Enabled bool   `yaml:"enabled" valid:"optional"`
-	Async   bool   `yaml:"async" valid:"optional,bool"`
-	Key     string `yaml:"key" valid:"required"`
+	Key   string `yaml:"key" valid:"required"`
+	Async bool   `yaml:"isAsync" valid:"-"`
+}
+
+func (mc MandrillConfig) String() string {
+	return mc.Name().String()
+}
+
+func (mc MandrillConfig) Name() MailProviderName {
+	return MailProviderMandrill
 }
 
 func (mc MandrillConfig) GetHostPort() contracts.AddressInterface {
@@ -38,14 +45,6 @@ func (mc MandrillConfig) GetSendTimeout() time.Duration {
 
 func (mc MandrillConfig) Validate() (bool, error) {
 	return contracts.ConfigValidate(mc)
-}
-
-func (mc MandrillConfig) String() string {
-	return "mandrillAPI"
-}
-
-func (mc MandrillConfig) IsEnable() bool {
-	return mc.Enabled
 }
 
 func (mc MandrillConfig) IsAsync() bool {

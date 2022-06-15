@@ -8,11 +8,14 @@ import (
 )
 
 type MailsConfigInterface interface {
-	contracts.ConfigValidatorInterface
+	contracts.ValidatableInterface
 	fmt.Stringer
+
+	GetActiveProviderConfig() (MailProviderConfigInterface, error)
+	GetMessageConfig() MessagingConfigInterface
 }
 
-type MailingsConfigInterface interface {
+type MessagingConfigInterface interface {
 	contracts.ValidatableInterface
 	fmt.Stringer
 
@@ -43,7 +46,7 @@ type MailProviderConfigInterface interface {
 	contracts.ValidatableInterface
 	fmt.Stringer
 
-	IsEnable() bool
+	Name() MailProviderName
 	IsAsync() bool
 	ConnectionType() MailProviderConnectionType
 	GetUsername() string

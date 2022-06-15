@@ -8,12 +8,19 @@ import (
 )
 
 type MailgunConfig struct {
-	Enabled        bool          `yaml:"enabled"`
 	APIBase        string        `yaml:"apiBase"`
 	Domain         string        `yaml:"domain"`
 	Key            string        `yaml:"key"`
 	DKIMPrivateKey string        `yaml:"DKIMPrivateKey"`
 	SendTimeout    time.Duration `yaml:"sendTimeout"`
+}
+
+func (mgc MailgunConfig) String() string {
+	return mgc.Name().String()
+}
+
+func (mgc MailgunConfig) Name() MailProviderName {
+	return MailProviderMailgun
 }
 
 func (mgc MailgunConfig) IsAsync() bool {
@@ -59,10 +66,6 @@ func (mgc MailgunConfig) Validate() (bool, error) {
 	return contracts.ConfigValidate(mgc)
 }
 
-func (mgc MailgunConfig) IsEnable() bool {
-	return mgc.Enabled
-}
-
 func (mgc MailgunConfig) ConnectionType() MailProviderConnectionType {
 	return MailProviderConnectionTypeAPI
 }
@@ -73,8 +76,4 @@ func (mgc MailgunConfig) GetUsername() string {
 
 func (mgc MailgunConfig) GetPassword() string {
 	return mgc.Key
-}
-
-func (mgc MailgunConfig) String() string {
-	return "mailgunAPI"
 }
