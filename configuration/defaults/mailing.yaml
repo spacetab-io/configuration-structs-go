@@ -9,8 +9,10 @@ defaults:
         name: "Reply me"
       mimeType: text/plain # text/html | text/plain
     providers:
-      active: file # file/smtp/mailgun/mandrill/sendgrid/smtp
+      active: file # logs/file/smtp/mailgun/mandrill/sendgrid/smtp
       available:
+        logs:
+          stream: stdout # stdout|stderr
         file:
           filePath: "emails.log"
           isAsync: true

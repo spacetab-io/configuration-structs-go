@@ -7,6 +7,7 @@ func (mpn MailProviderName) String() string {
 }
 
 const (
+	MailProviderLogs     MailProviderName = "logs"
 	MailProviderFile     MailProviderName = "file"
 	MailProviderMailgun  MailProviderName = "mailgun"
 	MailProviderMandrill MailProviderName = "mandrill"

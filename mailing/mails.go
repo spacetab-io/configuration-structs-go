@@ -8,6 +8,7 @@ import (
 )
 
 type AvailableProvidersConfig struct {
+	Logs     LogsConfig     `yaml:"logs"`
 	File     FileConfig     `yaml:"file"`
 	Mailgun  MailgunConfig  `yaml:"mailgun"`
 	Mandrill MandrillConfig `yaml:"mandrill"`
@@ -54,6 +55,8 @@ func (mmc MailsConfig) GetActiveProviderConfig() (MailProviderConfigInterface, e
 	var cfg MailProviderConfigInterface
 
 	switch mmc.Providers.Active {
+	case MailProviderLogs:
+		cfg = &mmc.Providers.Available.Logs
 	case MailProviderFile:
 		cfg = &mmc.Providers.Available.File
 	case MailProviderMailgun:
