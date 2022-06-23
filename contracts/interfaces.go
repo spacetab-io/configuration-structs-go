@@ -33,8 +33,8 @@ type AddressInterface interface {
 
 type AdressesInterface interface {
 	GetHosts() []string
-	GetPorts() []string
-	GetHostPortPairs() []string
+	GetPorts() []uint
+	GetHostPortPairs() map[string]string
 }
 
 type ApplicationInfoCfgInterface interface {
@@ -71,11 +71,6 @@ type DatabaseCfgInterface interface {
 	GetConnectionParams() (maxConnLifetime time.Duration, maxConns, minConns int32)
 }
 
-type NSQQueueCfgInterface interface {
-	GetNSQLookupdPath() string
-	GetNSQdPath() string
-}
-
 type SideRestServiceInterface interface {
 	DebugEnable() bool
 	GzipContent() bool
@@ -84,6 +79,8 @@ type SideRestServiceInterface interface {
 }
 
 type WebServerInterface interface {
+	ValidatableInterface
+
 	GetReadRequestTimeout() time.Duration
 	GetWriteResponseTimeout() time.Duration
 	GetIdleTimeout() time.Duration

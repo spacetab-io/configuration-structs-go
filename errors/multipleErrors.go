@@ -1,4 +1,4 @@
-package cfgstructs
+package errors
 
 import (
 	"sort"

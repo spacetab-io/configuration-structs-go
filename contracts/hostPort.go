@@ -54,27 +54,27 @@ func (c HostsCfg) GetHosts() []string {
 	hosts := make([]string, 0, len(c))
 
 	for _, host := range c {
-		hosts = append(hosts, host.Host)
+		hosts = append(hosts, host.GetHost())
 	}
 
 	return hosts
 }
 
-func (c HostsCfg) GetPorts() []string {
-	ports := make([]string, 0, len(c))
+func (c HostsCfg) GetPorts() []uint {
+	ports := make([]uint, 0, len(c))
 
 	for _, host := range c {
-		ports = append(ports, fmt.Sprintf("%d", host.Port))
+		ports = append(ports, host.GetPort())
 	}
 
 	return ports
 }
 
-func (c HostsCfg) GetHostPortPairs() []string {
-	hp := make([]string, 0, len(c))
+func (c HostsCfg) GetHostPortPairs() map[string]string {
+	hp := make(map[string]string)
 
-	for _, host := range c {
-		hp = append(hp, fmt.Sprintf("%s:%d", host.Host, host.Port))
+	for i, host := range c {
+		hp[fmt.Sprint(i)] = host.String()
 	}
 
 	return hp

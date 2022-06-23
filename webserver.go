@@ -3,6 +3,8 @@ package cfgstructs
 import (
 	"fmt"
 	"time"
+
+	"github.com/spacetab-io/configuration-structs-go/v2/contracts"
 )
 
 type CORSCfg struct {
@@ -15,26 +17,34 @@ type CORSCfg struct {
 }
 
 type HTTPTimeouts struct {
-	ReadHeader    time.Duration `yaml:"read_header"`    // In seconds! Ensure to enter in config value as string in format <val>s
-	ReadRequest   time.Duration `yaml:"read_request"`   // In seconds! Ensure to enter in config value as string in format <val>s
-	WriteResponse time.Duration `yaml:"write_response"` // In seconds! Ensure to enter in config value as string in format <val>s
-	Idle          time.Duration `yaml:"idle"`           // In seconds! Ensure to enter in config value as string in format <val>s
-	Shutdown      time.Duration `yaml:"shutdown"`       // In seconds! Ensure to enter in config value as string in format <val>s
+	ReadHeader    time.Duration `yaml:"read_header" valid:"required"`
+	ReadRequest   time.Duration `yaml:"read_request" valid:"required"`
+	WriteResponse time.Duration `yaml:"write_response" valid:"required"`
+	Idle          time.Duration `yaml:"idle" valid:"required"`
+	Shutdown      time.Duration `yaml:"shutdown" valid:"required"`
 }
 
 type RACCfg struct {
-	MaxConnsPerIP      int `yaml:"max_conn_per_ip"`
-	MaxRequestsPerConn int `yaml:"max_req_per_conn"`
+	MaxConnsPerIP      int `yaml:"max_conn_per_ip" valid:"required"`
+	MaxRequestsPerConn int `yaml:"max_req_per_conn" valid:"required"`
 }
 
 type WebServer struct {
-	Host                   string       `yaml:"host"`
-	Port                   int          `yaml:"port"`
-	CORS                   CORSCfg      `yaml:"cors"`
-	Timeouts               HTTPTimeouts `yaml:"timeouts"`
-	RequestsAndConnections RACCfg       `yaml:"requests_and_connections"`
+	Host                   string       `yaml:"host" valid:"required"`
+	Port                   int          `yaml:"port" valid:"required"`
+	CORS                   CORSCfg      `yaml:"cors" valid:"required"`
+	Timeouts               HTTPTimeouts `yaml:"timeouts" valid:"required"`
+	RequestsAndConnections RACCfg       `yaml:"requests_and_connections" valid:"required"`
 	Compress               bool         `yaml:"compress"`
 	Debug                  bool         `yaml:"debug"`
+}
+
+func (w WebServer) String() string {
+	return "web server config"
+}
+
+func (w WebServer) Validate() (bool, error) {
+	return contracts.ConfigValidate(w)
 }
 
 func (w WebServer) GetReadRequestTimeout() time.Duration {

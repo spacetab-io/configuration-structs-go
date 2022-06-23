@@ -1,7 +1,19 @@
 defaults:
   queue:
-    kafka:
-      enable: false
-      brokers:
-        - host: 127.0.0.1
-          port: 9092
+    active: nsq # nsq|kafka
+    available:
+      kafka:
+        log_level: warn
+        brokers:
+          - host: 127.0.0.1
+            port: 9092
+      nsq:
+        log_level: warn
+        max_in_flight: 1
+        nsqd:
+          host: localhost
+          port: 4150
+        lookupd:
+          host: localhost
+          port: 4161
+        max_attempts: 43200 # 12 часов на обработку отложенных сообщений

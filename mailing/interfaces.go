@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/spacetab-io/configuration-structs-go/v2/contracts"
+	"github.com/spacetab-io/configuration-structs-go/v2/mime"
 )
 
 type MailsConfigInterface interface {
@@ -22,6 +23,7 @@ type MessagingConfigInterface interface {
 	GetFrom() MailAddressInterface
 	GetReplyTo() MailAddressInterface
 	GetSubjectPrefix() string
+	GetMimeType() mime.Type
 }
 
 type MailAddressInterface interface {

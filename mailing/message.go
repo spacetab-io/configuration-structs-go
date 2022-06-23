@@ -18,6 +18,10 @@ func (mc MessagingConfig) GetSubjectPrefix() string {
 	return mc.SubjectPrefix
 }
 
+func (mc MessagingConfig) GetMimeType() mime.Type {
+	return mc.MimeType
+}
+
 func (mc MessagingConfig) String() string {
 	addresses := make([]string, 0, 3) // nolint: gomnd
 

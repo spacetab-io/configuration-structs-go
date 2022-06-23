@@ -48,12 +48,17 @@ func (d Database) String() string {
 }
 
 func (d Database) GetConnectionURL() string {
+	hostPorts := make([]string, 0, len(d.Hosts))
+	for _, hp := range d.Hosts.GetHostPortPairs() {
+		hostPorts = append(hostPorts, hp)
+	}
+
 	return fmt.Sprintf(
 		"%s://%s:%s@%s/%s?search_path=%s&sslmode=%s",
 		d.Driver,
 		d.User,
 		d.Pass,
-		strings.Join(d.Hosts.GetHostPortPairs(), ","),
+		strings.Join(hostPorts, ","),
 		d.Name,
 		d.Schema,
 		d.SSLMode,
@@ -65,10 +70,15 @@ func (d Database) GetDSN() string {
 		return d.GetConnectionURL()
 	}
 
+	pp := make([]string, 0, len(d.Hosts))
+	for _, p := range d.Hosts.GetPorts() {
+		pp = append(pp, fmt.Sprint(p))
+	}
+
 	return fmt.Sprintf(
 		"host=%s port=%s search_path=%s dbname=%s user=%s password=%s sslmode=%s",
 		strings.Join(d.Hosts.GetHosts(), ","),
-		strings.Join(d.Hosts.GetPorts(), ","),
+		strings.Join(pp, ","),
 		d.Schema,
 		d.Name,
 		d.User,

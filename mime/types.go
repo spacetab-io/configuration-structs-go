@@ -10,3 +10,7 @@ const (
 func (mt Type) String() string {
 	return string(mt)
 }
+
+func (mt Type) IsEmpty() bool {
+	return mt == ""
+}

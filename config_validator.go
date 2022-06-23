@@ -3,16 +3,17 @@ package cfgstructs
 import (
 	"github.com/asaskevich/govalidator"
 	"github.com/spacetab-io/configuration-structs-go/v2/contracts"
+	"github.com/spacetab-io/configuration-structs-go/v2/errors"
 )
 
 type ConfigValidator struct {
-	errs Errors
+	errs errors.Errors
 	cfgs []contracts.ValidatableInterface
 }
 
 func NewConfigValidator() contracts.ConfigValidatorInterface {
 	return &ConfigValidator{
-		errs: make(Errors, 0),
+		errs: make(errors.Errors, 0),
 		cfgs: make([]contracts.ValidatableInterface, 0),
 	}
 }

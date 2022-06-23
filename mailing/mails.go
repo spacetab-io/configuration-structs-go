@@ -1,10 +1,10 @@
 package mailing
 
 import (
-	"errors"
 	"fmt"
 
 	"github.com/spacetab-io/configuration-structs-go/v2/contracts"
+	"github.com/spacetab-io/configuration-structs-go/v2/errors"
 )
 
 type AvailableProvidersConfig struct {
@@ -49,8 +49,6 @@ func (mmc MailsConfig) Validate() (bool, error) {
 	return contracts.ConfigValidate(cfg)
 }
 
-var ErrUnknownProvider = errors.New("unknown email provider")
-
 func (mmc MailsConfig) GetActiveProviderConfig() (MailProviderConfigInterface, error) {
 	var cfg MailProviderConfigInterface
 
@@ -68,7 +66,7 @@ func (mmc MailsConfig) GetActiveProviderConfig() (MailProviderConfigInterface, e
 	case MailProviderSMTP:
 		cfg = &mmc.Providers.Available.SMTP
 	default:
-		return nil, ErrUnknownProvider
+		return nil, fmt.Errorf("%w for mailing: %s", errors.ErrUnknownProvider, mmc.Providers.Active)
 	}
 
 	return cfg, nil
