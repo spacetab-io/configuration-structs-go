@@ -34,7 +34,7 @@ type Database struct {
 	Pass               string             `yaml:"pass" valid:"optional"`
 	Schema             string             `yaml:"schema" valid:"optional"`
 	Name               string             `yaml:"database" valid:"required"`
-	SSLMode            string             `yaml:"ssl_mode" valid:"optional,in(disable|enable)"`
+	SSLMode            string             `yaml:"ssl_mode" valid:"optional,in(disable|enable|verify-full)"`
 	LogLevel           string             `yaml:"log_level" valid:"required,in(trace|debug|info|warning|error)"`
 	Seeding            SeedingCfg         `yaml:"seeding" valid:"optional"`
 	Migrations         MigrationCfg       `yaml:"migrations" valid:"optional"`
